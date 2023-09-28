@@ -2,18 +2,19 @@ import styles from './AvailableMeals.module.css'
 import Card from "../UI/Card";
 import MealItem from "./MealItem/MealItem";
 import {useCallback, useEffect, useState} from "react";
-import axios from "axios";
-import useHttp from "../../store/use-http";
+import useHttp from "../../hooks/use-http";
 import {Loader} from "../UI/Loader";
 
 
 const AvailableMeals = () => {
+
     const [meals, setMeals] = useState([]);
 
     const {isLoading, error, sendRequest} = useHttp()
+
     const requestConfig = {
         method: "GET",
-        url: "https://react-http-7ab0c-default-rtdb.europe-west1.firebasedatabase.app/meals.jso",
+        url: "https://react-http-7ab0c-default-rtdb.europe-west1.firebasedatabase.app/meals.json",
         cleanData : useCallback((data) => {
             const loadMeals = [];
             for (const key in data){
@@ -27,7 +28,7 @@ const AvailableMeals = () => {
                 )
             }
             setMeals(loadMeals);
-        })
+        },[])
     }
     useEffect(() => {
         sendRequest(requestConfig);
@@ -44,8 +45,6 @@ const AvailableMeals = () => {
                 {mealsList}
             </ul>}
             {error && <p>There is a server error.</p>}
-
-
         </Card>
     </section>
 };

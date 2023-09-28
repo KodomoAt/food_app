@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import CartIcon from "../Cart/CartIcon";
 import CartContext from "../../store/cart-context";
 import styles from './HeaderCardButton.module.css'
-import cart from "../Cart/Cart";
+
 
 const HeaderCardButton = (props) => {
     const [btnIsHighlighted, setBtnIsHighlighted] = useState(false)
